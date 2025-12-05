@@ -6,7 +6,7 @@
 /*   By: aimokhta <aimokhta@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 21:46:55 by aimokhta          #+#    #+#             */
-/*   Updated: 2025/12/04 12:51:19 by aimokhta         ###   ########.fr       */
+/*   Updated: 2025/12/04 18:58:00 by aimokhta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ typename ContainerT::iterator easyfind(ContainerT &container, const int &num)
 template<typename ContainerT>
 void testing()
 {
-	int arr[] = {26, 30, 34, 38, 42, 45, 69, 70, 5, 5, 3, -10, -3, -23};
+	int arr[] = {26, 30, 34, 38, 42, 45, 69, 70, 5, 5, 3};
 	ContainerT container(arr, arr + sizeof(arr)/sizeof(int));
 	
 	for (typename ContainerT::iterator it = container.begin();
