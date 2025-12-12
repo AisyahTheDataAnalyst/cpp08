@@ -6,7 +6,7 @@
 /*   By: aimokhta <aimokhta@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 21:46:55 by aimokhta          #+#    #+#             */
-/*   Updated: 2025/12/04 18:58:00 by aimokhta         ###   ########.fr       */
+/*   Updated: 2025/12/12 12:45:26 by aimokhta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,12 @@
 # include <vector>		// std::vector
 # include <list>		// std::list
 # include <deque>		// std::deque
-//		associative containers
-# include <map>			// std::map, std::multimap
-# include <set>			// std::set, std::multiset
 //		container adapters
 # include <stack>		// std::stack
 # include <queue>		// std::queue, std::priority_queue
+//		associative containers
+# include <map>			// std::map, std::multimap
+# include <set>			// std::set, std::multiset
 
 template <typename ContainerT>
 typename ContainerT::iterator easyfind(ContainerT &container, const int &num)
