@@ -6,7 +6,7 @@
 /*   By: aimokhta <aimokhta@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 21:58:13 by aimokhta          #+#    #+#             */
-/*   Updated: 2025/12/11 19:34:15 by aimokhta         ###   ########.fr       */
+/*   Updated: 2025/12/15 19:27:22 by aimokhta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ int main()
 	testing<std::set<int> >();
 	
 	border("TEST2 - std::multiset of int", PURPLE);
-	testing<std::set<int> >();
+	testing<std::multiset<int> >();
 
 	// cant test on map/multimap -> they need 2 arguments: key and value
 	// border("TEST1 - std::map of int", PURPLE);
