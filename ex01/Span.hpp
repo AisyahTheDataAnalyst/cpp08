@@ -6,7 +6,7 @@
 /*   By: aimokhta <aimokhta@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 22:02:06 by aimokhta          #+#    #+#             */
-/*   Updated: 2025/12/15 02:01:22 by aimokhta         ###   ########.fr       */
+/*   Updated: 2025/12/15 12:50:30 by aimokhta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@
 #  define SMALLTEST 1
 #  define BIGTEST 0
 # define PDFTEST 0
-
-
 
 // COLOURS
 # define CYAN			"\033[1;36m"

@@ -6,7 +6,7 @@
 /*   By: aimokhta <aimokhta@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/04 16:13:25 by aimokhta          #+#    #+#             */
-/*   Updated: 2025/12/15 00:53:02 by aimokhta         ###   ########.fr       */
+/*   Updated: 2025/12/15 13:17:02 by aimokhta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ Span &Span::operator=(const Span &other)
 
 Span::~Span()
 {
-	this->_container.clear();
+	// this->_container.clear(); // no need, container's destructors cleans memory already
 }
 
 
