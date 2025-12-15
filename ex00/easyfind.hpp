@@ -6,7 +6,7 @@
 /*   By: aimokhta <aimokhta@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 21:46:55 by aimokhta          #+#    #+#             */
-/*   Updated: 2025/12/12 12:45:26 by aimokhta         ###   ########.fr       */
+/*   Updated: 2025/12/15 19:04:03 by aimokhta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,18 +63,24 @@ void testing()
 		 it != container.end();
 		 ++it)
 	{
-		const int &element = *it;
-		std::cout << element << " at " << &element << '\n';
+		// const int &element = *it;
+		// std::cout << element << " at " << &element << '\n';
+		std::cout << *it << " at " << &(*it) << '\n';
 	}
 
 	typename ContainerT::iterator it;
 	
 	it = easyfind(container, 26);
-	std::cout << GREEN << "Found 26 at " << &(*it) << '\n' << RESET;
+	if (it != container.end())
+		std::cout << GREEN << "Found 26 at " << &(*it) << '\n' << RESET;
+	else
+		std::cerr << RED << "Cannot find 26, its the end() iterator instead\n" << RESET;
 
 	it = easyfind(container, 0);
-	if (it == container.end())
-		std::cerr << RED <<"Cannot find 0, its the end() iterator instead\n" << RESET;
+	if (it != container.end())
+		std::cout << GREEN << "Found 0 at " << &(*it) << '\n' << RESET;
+	else
+		std::cerr << RED << "Cannot find 0, its the end() iterator instead\n" << RESET;
 	
 }
 

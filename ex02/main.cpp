@@ -6,7 +6,7 @@
 /*   By: aimokhta <aimokhta@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 21:52:47 by aimokhta          #+#    #+#             */
-/*   Updated: 2025/12/15 13:47:33 by aimokhta         ###   ########.fr       */
+/*   Updated: 2025/12/15 17:32:17 by aimokhta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,9 +132,12 @@ int main ()
 // |				subject/evaluation sheet's given test                    |
 // ===========================================================================
 
+// Cant default it to std::deque for templated function (C++11)
+// can only default to templated class in C++98
+template <class ContainerT>
 void MutantStackTest()
 {
-	MutantStack<int> mstack;
+	MutantStack<int, ContainerT> mstack;
 	
 	mstack.push(5);
 	mstack.push(17);
@@ -148,8 +151,8 @@ void MutantStackTest()
 	//[...]
 	mstack.push(0);
 	
-	MutantStack<int>::iterator it = mstack.begin();
-	MutantStack<int>::iterator ite = mstack.end();
+	typename MutantStack<int, ContainerT>::iterator it = mstack.begin();
+	typename MutantStack<int, ContainerT>::iterator ite = mstack.end();
 	
 	++it;
 	--it;
@@ -160,7 +163,7 @@ void MutantStackTest()
 		++it;
 	}
 	
-	std::stack<int> copy(mstack);
+	std::stack<int, ContainerT> copy(mstack);
 	
 	std::cout 
 	<< "\n---size comparison---\n"
@@ -215,14 +218,18 @@ void containersTest()
 
 int main()
 {
-	border("Test on our own MutantStack class", YELLOW);
-	MutantStackTest();
-	border("Test on std::vector", YELLOW);
-	containersTest<std::vector<int> >();
-	border("Test on std::list", YELLOW);
-	containersTest<std::list<int> >();
-	border("Test on std::deque", YELLOW);
+	border("Test on our own MutantStack class - std::deque (default)", YELLOW);
+	MutantStackTest<std::deque<int> >();
+	border("Test on our own MutantStack class - std::vector", YELLOW);
+	MutantStackTest<std::vector<int> >();
+	border("Test on our own MutantStack class - std::list", YELLOW);
+	MutantStackTest<std::list<int> >();
+	border("Test on std::deque", PURPLE);
 	containersTest<std::deque<int> >();
+	border("Test on std::vector", PURPLE);
+	containersTest<std::vector<int> >();
+	border("Test on std::list", PURPLE);
+	containersTest<std::list<int> >();
 	return 0;
 }
 #endif

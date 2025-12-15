@@ -6,7 +6,7 @@
 /*   By: aimokhta <aimokhta@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 22:02:06 by aimokhta          #+#    #+#             */
-/*   Updated: 2025/12/15 12:50:30 by aimokhta         ###   ########.fr       */
+/*   Updated: 2025/12/15 17:58:21 by aimokhta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,8 @@
 class Span
 {
 	private:
-		size_t		_size;
-		std::vector<int>	_container;
+		size_t				_size;
+		std::vector<int>	_container; // composit container = containert within class
 		Span();
 		
 	public:
@@ -76,8 +76,8 @@ class Span
 		void addRange(itT begin, itT end);
 		
 		void addNumber(int n);
-		size_t shortestSpan();
-		size_t longestSpan();
+		int shortestSpan();
+		int longestSpan();
 		int &operator[](size_t index);
 
 		

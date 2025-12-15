@@ -6,15 +6,15 @@
 /*   By: aimokhta <aimokhta@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 22:00:51 by aimokhta          #+#    #+#             */
-/*   Updated: 2025/12/15 13:33:26 by aimokhta         ###   ########.fr       */
+/*   Updated: 2025/12/15 18:04:44 by aimokhta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MUTANTSTACK_HPP
 # define MUTANTSTACK_HPP
 
-# define MYOWNTEST 1
-# define PDFTEST 0
+# define MYOWNTEST 0
+# define PDFTEST 1
 
 # include <vector>		// std::vector
 # include <list>		// std::list
@@ -62,18 +62,22 @@
 	By default, std::deque is used if no container class is specified
 */
 
+
+// even though std::stack has specify deque as the default in their template arg
+// C++ never inherits default template arguments from another template.
+// WRONG -> template <class T, class Container>
 template <class T, class Container = std::deque<T> >
-class MutantStack : public std::stack<T, Container>
+class MutantStack : public std::stack<T, Container> // container inheritance - no virtal destructor so.. not safe for long inheritence
 {	
 	
-	// no need this protected part, already apatr form the tmplate headline itsel
+	// no need this protected part, already apart form the template headline itself
 	// or else itll look like 
-	// - shadow the base class memeber
+	// - shadow the base class member
 	// - break the relationship with std::stack
 	// 
 	// protected:
 	// 	Container c;
-
+	
 	public:
 		//OCF
 		MutantStack();
@@ -88,8 +92,6 @@ class MutantStack : public std::stack<T, Container>
 		iterator end();
 		reverse_iterator rbegin();
 		reverse_iterator rend();
-
-		
 };
 
 
@@ -109,12 +111,16 @@ MutantStack<T, Container>::MutantStack(const MutantStack &other)
 template <class T, class Container>
 MutantStack<T, Container> &MutantStack<T, Container>::operator=(const MutantStack &other)
 {
-	if (this != &other)
+	if (this != other)
 	{
-		if (this->c.empty())
-			this->c.clear();
-		this->c.resize(other.c.size());
-		std::copy(other.c.begin(), other.c.end(), this->c.begin());
+		// this is unnecessary, containers will handle it themselves
+		// if (this->c.empty())
+		// 	this->c.clear();
+		// this->c.resize(other.c.size());
+		// std::copy(other.c.begin(), other.c.end(), this->c.begin());
+
+		// this alone is enough as a complete deep copy
+		this->c = other.c;
 	}
 	return *this;
 }
@@ -122,7 +128,7 @@ MutantStack<T, Container> &MutantStack<T, Container>::operator=(const MutantStac
 template <class T, class Container>
 MutantStack<T, Container>::~MutantStack()
 {
-	// this->c.clear(); container's destructors themselves handle this for you already
+	// this->c.clear(); // container's destructors already handle freeing memory 
 }
 
 // compiler dosent know what iterator is(static/ type/ etc ?)

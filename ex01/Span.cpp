@@ -6,7 +6,7 @@
 /*   By: aimokhta <aimokhta@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/04 16:13:25 by aimokhta          #+#    #+#             */
-/*   Updated: 2025/12/15 13:17:02 by aimokhta         ###   ########.fr       */
+/*   Updated: 2025/12/15 17:47:22 by aimokhta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,14 +33,19 @@ Span &Span::operator=(const Span &other)
 {
 	if (this != &other)
 	{
-		if (!this->_container.empty())
-			this->_container.clear();
+		// option 1
+		// -> operator= on a container already clears and replaces its contents safely.
+		// -> resize + copy is manual re-implementation of assignment
+		//
+		// if (!this->_container.empty())
+		// 	this->_container.clear();
+		// this->_size = other._size;
+		// this->_container.resize(other._size);
+		// std::copy(other._container.begin(), other._container.end(), this->_container.begin());
+
+		// option 2 -> containers already handle above all in its templated class
 		this->_size = other._size;
-		// 1 -> with resize
-		this->_container.resize(other._size);
-		std::copy(other._container.begin(), other._container.end(), this->_container.begin());
-		// 2 -> w/o resize
-		// std::copy(other._container.begin(), other._container.end(), std::back_inserter(this->_container));
+		this->_container = other._container;
 	}
 	return *this;
 }
@@ -69,7 +74,7 @@ void Span::addNumber(int num)
 		diffs 		= {1, (3-1), (6-3), (8-6)};
 			 		= { 1, 2, 3, 2}; // thas why we search the shortest_span from index 1 (.begin() + 1)
 */
-size_t Span::shortestSpan()
+int Span::shortestSpan()
 {
 	if (this->_container.size() <= 1)
 		throw Span::NoSpanFoundException();
@@ -99,14 +104,14 @@ size_t Span::shortestSpan()
 	// return span;
 
 	std::vector<int> temp = this->_container;
-	std::vector<int> diffs(this->_size);
+	std::vector<int> diffs(temp.size());
 	std::sort(temp.begin(), temp.end());
 	std::adjacent_difference(temp.begin(), temp.end(), diffs.begin());
-	int smallest = *(std::min_element(diffs.begin() + 1, diffs.end()));
+	int smallest = std::abs(*(std::min_element(diffs.begin() + 1, diffs.end())));
 	return smallest;
 }
 		
-size_t  Span::longestSpan()
+int  Span::longestSpan()
 {
 	if (this->_container.size() <= 1)
 		throw Span::NoSpanFoundException();
@@ -126,16 +131,19 @@ size_t  Span::longestSpan()
 	
 	std::vector<int> temp = this->_container;
 	std::sort(temp.begin(), temp.end());
-	int smallest = *(std::min_element(temp.begin(), temp.end()));
-	int largest = *(std::max_element(temp.begin(), temp.end()));
-	size_t span = largest - smallest;
+	// int smallest = *(std::min_element(temp.begin(), temp.end()));
+	// int largest = *(std::max_element(temp.begin(), temp.end()));
+	// another simpler way:
+	int smallest = temp.front();
+	int largest = temp.back();
+	int span = std::abs(largest - smallest);
 	return span;
 }
 
 int &Span::operator[](size_t index)
 {
 	// .at() throw their own std::out_of_range too
-	if (index < 0 || index >= this->_container.size())
+	if (index >= this->_container.size())
 		throw std::out_of_range("Error: Out of bound!");
 	
 	return this->_container.at(index);
