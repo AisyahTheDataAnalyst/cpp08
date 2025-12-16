@@ -6,7 +6,7 @@
 /*   By: aimokhta <aimokhta@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 22:00:51 by aimokhta          #+#    #+#             */
-/*   Updated: 2025/12/15 18:04:44 by aimokhta         ###   ########.fr       */
+/*   Updated: 2025/12/16 18:01:24 by aimokhta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ MutantStack<T, Container>::MutantStack(const MutantStack &other)
 template <class T, class Container>
 MutantStack<T, Container> &MutantStack<T, Container>::operator=(const MutantStack &other)
 {
-	if (this != other)
+	if (this != &other)
 	{
 		// this is unnecessary, containers will handle it themselves
 		// if (this->c.empty())

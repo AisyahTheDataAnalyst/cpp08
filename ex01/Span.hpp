@@ -6,7 +6,7 @@
 /*   By: aimokhta <aimokhta@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 22:02:06 by aimokhta          #+#    #+#             */
-/*   Updated: 2025/12/15 17:58:21 by aimokhta         ###   ########.fr       */
+/*   Updated: 2025/12/16 18:00:28 by aimokhta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,9 +97,17 @@ class Span
 
 // void Span::addRange(vector<int>::iterator begin, vector<int>iterator end) 
 // ->cant do this, thats why have to do templated function
+// the return value of std::distance can be a negative value, 
+// but only if the iterators provided are random-access iterators. 
+// Random-access iterators (e.g., for std::vector, std::deque, std::array, or raw pointers): 
+// The function calculates last - first
+// If the first iterator points to a position that comes after the last iterator in the container, 
+// the result will be negative.
 template <typename itT>
 void Span::addRange(itT begin, itT end)
 {	
+	if (std::distance(begin, end) < 0)
+		throw std::runtime_error("The start iterator parameter inputted comes after the last iterator. std::distance(start, last) returns negative result, thus not valid to implement addRange function.");
 	if (this->_container.size() + std::distance(begin, end) > this->_size)
 		throw FullCapacityException();
 
